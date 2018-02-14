@@ -1,6 +1,6 @@
 package ConcCounter;
 
-public interface ConcCounter<T extends Associable<T>> {
-  T GetAndAdd(T t, int thread_id) throws InterruptedException;
-  T AddAndGet(T t, int thread_id) throws InterruptedException;
+public interface ConcCounter {
+  int GetAndIncrement(int thread_id) throws InterruptedException;
+  int IncrementAndGet(int thread_id) throws InterruptedException;
 }

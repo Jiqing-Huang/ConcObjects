@@ -1,32 +1,24 @@
 package ConcCounter;
 
-public class SimpleCounter<T extends Associable<T>> implements ConcCounter<T> {
+public class SimpleCounter implements ConcCounter {
 
-  public SimpleCounter(T identity) {
-    counter = identity.Clone();
+  public SimpleCounter() {
+    counter = 0;
   }
 
   @Override
-  public T GetAndAdd(T t, int thread_id) {
-    return SyncGetAndAdd(t);
+  public int GetAndIncrement(int thread_id) throws InterruptedException {
+    return SyncGetAndIncrement();
   }
 
   @Override
-  public T AddAndGet(T t, int thread_id) {
-    return SyncAddAndGet(t);
+  public int IncrementAndGet(int thread_id) throws InterruptedException {
+    return SyncGetAndIncrement() + 1;
   }
 
-  synchronized private T SyncGetAndAdd(T t) {
-    T ret = counter.Clone();
-    counter.Aggregate(t);
-    return ret;
+  synchronized private int SyncGetAndIncrement() {
+    return counter++;
   }
 
-  synchronized private T SyncAddAndGet(T t) {
-    counter.Aggregate(t);
-    T ret = counter.Clone();
-    return ret;
-  }
-
-  private T counter;
+  private int counter;
 }

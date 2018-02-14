@@ -2,21 +2,21 @@ package ConcCounter;
 
 enum State { Idle, First, Second, Result, Root }
 
-public class CTNode<T extends Associable<T>> {
+public class CTNode {
 
-  public CTNode(T identity) {
-    first = identity.Clone();
-    second = identity.Clone();
-    result = identity.Clone();
+  public CTNode() {
+    first = 0;
+    second = 0;
+    result = 0;
     locked = false;
     state = State.Root;
     parent = null;
   }
 
-  public CTNode(CTNode<T> parent, T identity) {
-    first = identity.Clone();
-    second = identity.Clone();
-    result = identity.Clone();
+  public CTNode(CTNode parent) {
+    first = 0;
+    second = 0;
+    result = 0;
     locked = false;
     state = State.Idle;
     this.parent = parent;
@@ -40,53 +40,50 @@ public class CTNode<T extends Associable<T>> {
     }
   }
 
-  synchronized public T Combine(T t) throws InterruptedException {
+  synchronized public int Combine(int combined) throws InterruptedException {
     while (locked)
       wait();
     locked = true;
-    first.Set(t);
+    first = combined;
     switch (state) {
       case First:
-        return t;
+        return combined;
       case Second:
-        t.Aggregate(second);
-        return t;
+        return first + second;
       default:
         throw new IllegalStateException("Illegal node state.");
     }
   }
 
-  synchronized public T Op(T combined) throws InterruptedException {
+  synchronized public int Op(int combined) throws InterruptedException {
     switch (state) {
       case Root:
-        T prior = result.Clone();
-        result.Aggregate(combined);
+        int prior = result;
+        result += combined;
         return prior;
       case Second:
-        second.Set(combined);
+        second = combined;
         locked = false;
         notifyAll();
         while (state != State.Result)
           wait();
         state = State.Idle;
-        combined.Set(result);
         locked = false;
         notifyAll();
-        return combined;
+        return result;
       default:
         throw new IllegalStateException("Illegal node state.");
     }
   }
 
-  synchronized public void Distribute(T prior) {
+  synchronized public void Distribute(int prior) {
     switch (state) {
       case First:
         state = State.Idle;
         locked = false;
         break;
       case Second:
-        result.Set(prior);
-        result.Aggregate(first);
+        result = prior + first;
         state = State.Result;
         break;
       default:
@@ -95,14 +92,14 @@ public class CTNode<T extends Associable<T>> {
     notifyAll();
   }
 
-  public CTNode<T> Parent() {
+  public CTNode Parent() {
     return parent;
   }
 
-  private T first;
-  private T second;
-  private T result;
+  private int first;
+  private int second;
+  private int result;
   private volatile boolean locked;
   private volatile State state;
-  private CTNode<T> parent;
+  private CTNode parent;
 }
