@@ -56,7 +56,7 @@ List of Packages:
   
 6. ConcStack: concurrent LIFO stack\
   \
-  LockFreeStack: a CAS based lock free stack.
+  LockFreeStack: a CAS based lock free stack.\
   EliminationBackoffStack: a LockFreeStack with an exchange array for failed pusher and 
   popper to exchange items with a backoff policy. 
   
