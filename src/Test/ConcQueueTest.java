@@ -1,9 +1,9 @@
 package Test;
 
-import ConcQueue.BoundedQueue;
-import ConcQueue.ConcQueue;
-import ConcQueue.LockFreeQueue;
-import ConcQueue.UnboundedQueue;
+import Queue.BoundedQueue;
+import Queue.ConcQueue;
+import Queue.LockFreeQueue;
+import Queue.UnboundedQueue;
 
 import java.util.Random;
 

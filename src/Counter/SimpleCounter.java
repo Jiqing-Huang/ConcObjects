@@ -1,6 +1,6 @@
-package ConcCounter;
+package Counter;
 
-public class SimpleCounter implements ConcCounter {
+public class SimpleCounter implements Counter.ConcCounter {
 
   public SimpleCounter() {
     counter = 0;

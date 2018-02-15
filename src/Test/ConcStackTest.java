@@ -1,8 +1,8 @@
 package Test;
 
-import ConcStack.ConcStack;
-import ConcStack.EliminationBackoffStack;
-import ConcStack.LockFreeStack;
+import Stack.ConcStack;
+import Stack.EliminationBackoffStack;
+import Stack.LockFreeStack;
 
 import java.util.Random;
 

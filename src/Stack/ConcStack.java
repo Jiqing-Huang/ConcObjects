@@ -1,4 +1,4 @@
-package ConcStack;
+package Stack;
 
 public interface ConcStack<T> {
   void Push(T t);

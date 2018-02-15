@@ -1,11 +1,10 @@
 package Test;
 
-import ConcCounter.BitonicCounter;
-import ConcCounter.CombiningTreeCounter;
-import ConcCounter.ConcCounter;
-import ConcCounter.SimpleCounter;
+import Counter.BitonicCounter;
+import Counter.CombiningTreeCounter;
+import Counter.ConcCounter;
+import Counter.SimpleCounter;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class ConcCounterTest extends Thread {

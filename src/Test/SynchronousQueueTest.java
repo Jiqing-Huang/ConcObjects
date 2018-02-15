@@ -1,6 +1,8 @@
 package Test;
 
-import ConcQueue.*;
+import Queue.ConcQueue;
+import Queue.SynchronousQueue;
+import Queue.SynchronousDualQueue;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;

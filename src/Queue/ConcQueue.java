@@ -1,4 +1,4 @@
-package ConcQueue;
+package Queue;
 
 public interface ConcQueue<T> {
   void Offer(T t) throws InterruptedException;

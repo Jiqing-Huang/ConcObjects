@@ -1,4 +1,4 @@
-package ConcCounter;
+package Counter;
 
 import java.util.concurrent.atomic.AtomicLong;
 

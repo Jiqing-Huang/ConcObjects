@@ -1,4 +1,4 @@
-package ConcQueue;
+package Queue;
 
 import java.util.concurrent.atomic.AtomicReference;
 

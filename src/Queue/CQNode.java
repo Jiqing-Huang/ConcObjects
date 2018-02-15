@@ -1,4 +1,4 @@
-package ConcQueue;
+package Queue;
 
 public class CQNode<T> {
   public CQNode(T t) {

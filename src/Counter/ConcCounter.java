@@ -1,4 +1,4 @@
-package ConcCounter;
+package Counter;
 
 public interface ConcCounter {
   int GetAndIncrement(int thread_id) throws InterruptedException;

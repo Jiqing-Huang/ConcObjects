@@ -1,4 +1,4 @@
-package ConcStack;
+package Stack;
 
 import java.util.concurrent.TimeoutException;
 

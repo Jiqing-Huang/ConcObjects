@@ -1,4 +1,4 @@
-package ConcStack;
+package Stack;
 
 public class SNode<T> {
   public SNode(T t) {

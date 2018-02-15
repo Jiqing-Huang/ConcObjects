@@ -1,4 +1,4 @@
-package ConcCounter;
+package Counter;
 
 enum State { Idle, First, Second, Result, Root }
 

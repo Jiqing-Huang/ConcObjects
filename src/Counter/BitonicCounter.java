@@ -1,8 +1,8 @@
-package ConcCounter;
+package Counter;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class BitonicCounter implements ConcCounter {
+public class BitonicCounter implements Counter.ConcCounter {
 
   public BitonicCounter(int num_threads) {
     width = CeilingPowerOfTwo(num_threads);
