@@ -31,7 +31,7 @@ public class BitonicCounter implements Counter.ConcCounter {
   }
 
   private int CeilingPowerOfTwo(int x) {
-    x = x - 1;
+    --x;
     x |= x >> 1;
     x |= x >> 2;
     x |= x >> 4;

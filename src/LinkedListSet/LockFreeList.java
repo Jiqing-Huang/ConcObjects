@@ -11,7 +11,7 @@ public class LockFreeList<T> implements LinkedListSet<T> {
 
   @Override
   public boolean Add(T t) {
-    int key = t.hashCode();
+    int key = Hash(t);
     while (true) {
       Window<T> window = Find(head, key);
       AtomicMarkableNode<T> pred = window.pred;
@@ -19,7 +19,7 @@ public class LockFreeList<T> implements LinkedListSet<T> {
       if (curr.key == key) {
         return false;
       } else {
-        AtomicMarkableNode<T> node = new AtomicMarkableNode<>(t);
+        AtomicMarkableNode<T> node = new AtomicMarkableNode<>(t, key);
         node.next = new AtomicMarkableReference<>(curr, false);
         if (pred.next.compareAndSet(curr, node, false, false)) return true;
       }
@@ -28,7 +28,7 @@ public class LockFreeList<T> implements LinkedListSet<T> {
 
   @Override
   public boolean Remove(T t) {
-    int key = t.hashCode();
+    int key = Hash(t);
     boolean snip;
     while (true) {
       Window<T> window = Find(head, key);
@@ -49,16 +49,20 @@ public class LockFreeList<T> implements LinkedListSet<T> {
   @Override
   public boolean Contains(T t) {
     boolean[] marked = new boolean[] {false};
-    int key = t.hashCode();
+    int key = Hash(t);
     AtomicMarkableNode<T> curr = head;
     while (curr.key < key) {
       curr = curr.next.getReference();
-      AtomicMarkableNode<T> succ = curr.next.get(marked);
+      curr.next.get(marked);
     }
     return (curr.key == key && !marked[0]);
   }
 
-  private Window<T> Find(AtomicMarkableNode<T> head, int key) {
+  protected int Hash(T t) {
+    return t.hashCode();
+  }
+
+  protected Window<T> Find(AtomicMarkableNode<T> head, int key) {
     AtomicMarkableNode<T> pred, curr, succ;
     boolean[] marked = new boolean[] {false};
     boolean snip;
@@ -73,12 +77,12 @@ public class LockFreeList<T> implements LinkedListSet<T> {
           curr = succ;
           succ = curr.next.get(marked);
         }
-        if (curr.key >= key) return new Window<T>(pred, curr);
+        if (curr.key >= key) return new Window<>(pred, curr);
         pred = curr;
         curr = succ;
       }
     }
   }
 
-  private AtomicMarkableNode<T> head;
+  protected AtomicMarkableNode<T> head;
 }

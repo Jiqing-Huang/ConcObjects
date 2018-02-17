@@ -3,9 +3,9 @@ package LinkedListSet;
 import java.util.concurrent.atomic.AtomicMarkableReference;
 
 public class AtomicMarkableNode<T> {
-  public AtomicMarkableNode(T t) {
+  public AtomicMarkableNode(T t, int hashcode) {
     item = t;
-    key = item.hashCode();
+    key = hashcode;
     next = new AtomicMarkableReference<>(null, false);
   }
 
