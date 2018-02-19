@@ -1,6 +1,7 @@
 package Stack;
 
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class EliminationBackoffStack<T> extends LockFreeStack<T> implements ConcStack<T> {
 
